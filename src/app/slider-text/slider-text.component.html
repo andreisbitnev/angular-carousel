@@ -1,0 +1,7 @@
+<p>
+    <ng-container *ngFor="let text of textArr; let index = index">
+        <span *ngIf="index !== 0" class="highlight">{{ highlight }}</span>{{text}}
+    </ng-container>
+</p>
+
+  

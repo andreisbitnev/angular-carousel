@@ -1,0 +1,50 @@
+* { margin: 0 }
+
+.container {
+  overflow-x: hidden;
+  font-family: Helvetica, Arial, sans-serif;
+  color: white;
+  .carousel {
+    --n: 1;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    width: 100%; // fallback
+    width: calc(var(--n)*100%);
+    height: 400px;
+    cursor: pointer;
+
+    .slide {
+      width: 100%; // fallback
+      width: calc(100%/var(--n));
+      height: 100%;
+      user-select: none;
+      pointer-events: none;
+      background-size: cover;
+      background-position: center;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      img {
+        max-width: 260px;
+        width: 100%;
+      }
+      .text-container {
+        padding: 0 20px;
+        h2 {
+          font-size: 25px;
+          font-weight: 700;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.move {
+  transform: translate(calc(var(--i, 0)/var(--n)*-100%));
+  transition: transform .5s ease-out;
+}

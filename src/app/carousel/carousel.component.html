@@ -1,0 +1,30 @@
+<div class="container">
+  <div 
+    class="carousel"
+    [class.move]="allowMove"
+    [ngStyle]="{
+      '--n': slides.length, 
+      '--i': activeSlide
+    }"
+    (mousedown)="lock($event)"
+    (touchstart)="lock($event)"
+    (mouseup)="move($event)"
+    (touchend)="move($event)"
+  >
+    <div
+      *ngFor="let slide of slides; let slideIndex = index"
+      class="slide"
+      [ngStyle]="{'background-image': getSlideBgUrl(slide)}"
+    >
+      <img [src]="slide.mainImageUrl"/>
+      <div class="text-container">
+        <h2>{{slide.title}}</h2>
+        <app-slider-text 
+          [text]="slide.text"
+          [highlight]="slide.textHighlight" 
+        />
+        <app-button [btnText]="slide.btnText" />
+      </div>
+    </div>
+  </div>
+</div>
