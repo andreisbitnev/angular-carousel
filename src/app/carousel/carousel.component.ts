@@ -20,6 +20,8 @@ export class CarouselComponent implements OnInit {
   allowMove = true;
   activeSlide = 0;
   x0: number | undefined = 0; 
+  timeout: any;
+  updateTime: number = 10000;
 
   unify(e: any) {	
     return e.changedTouches ? e.changedTouches[0] : e 
@@ -37,6 +39,7 @@ export class CarouselComponent implements OnInit {
       }
       this.x0 = 0;
     }
+    this.updateSlide();
   };
 
   ngAfterContentChecked(): void {
@@ -52,7 +55,18 @@ export class CarouselComponent implements OnInit {
     }
   }
 
+  updateSlide() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.timeout = setTimeout(() => {
+      this.activeSlide += 1;
+      this.updateSlide()
+    }, this.updateTime)
+  }
+
   ngOnInit(): void {
+    this.updateSlide();
   }
 
   getSlideBgUrl(slide: SlideInterface) {
